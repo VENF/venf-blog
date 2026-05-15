@@ -1,0 +1,73 @@
+.l {
+  fill: #ffffff;
+  opacity: 0;
+  animation: icon-07-k 2000ms linear infinite both;
+}
+
+@keyframes icon-07-k {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  26% { opacity: 0.08; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+.d00 { animation-delay: 0ms; }
+.d01 { animation-delay: 125ms; }
+.d02 { animation-delay: 250ms; }
+.d03 { animation-delay: 375ms; }
+.d04 { animation-delay: 500ms; }
+.d10 { animation-delay: 1875ms; }
+.d14 { animation-delay: 625ms; }
+.d20 { animation-delay: 1750ms; }
+.d24 { animation-delay: 750ms; }
+.d30 { animation-delay: 1625ms; }
+.d34 { animation-delay: 875ms; }
+.d40 { animation-delay: 1500ms; }
+.d41 { animation-delay: 1375ms; }
+.d42 { animation-delay: 1250ms; }
+.d43 { animation-delay: 1125ms; }
+.d44 { animation-delay: 1000ms; }
+
+.logo-anim {
+  fill: #ffffff;
+  opacity: 0.07;
+  animation: logo-pulse 2000ms linear infinite both;
+}
+
+@keyframes logo-pulse {
+  0% { opacity: 0.07; }
+  4% { opacity: 1; }
+  26% { opacity: 0.07; }
+  100% { opacity: 0.07; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-anim {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+.s00 { animation-delay: 0ms; }
+.s01 { animation-delay: 125ms; }
+.s02 { animation-delay: 250ms; }
+.s03 { animation-delay: 375ms; }
+.s04 { animation-delay: 500ms; }
+.s05 { animation-delay: 625ms; }
+.s06 { animation-delay: 750ms; }
+.s07 { animation-delay: 875ms; }
+.s08 { animation-delay: 1000ms; }
+.s09 { animation-delay: 1125ms; }
+.s10 { animation-delay: 1250ms; }
+.s11 { animation-delay: 1375ms; }
+.s12 { animation-delay: 1500ms; }
+.s13 { animation-delay: 1625ms; }
+.s14 { animation-delay: 1750ms; }
+.s15 { animation-delay: 1875ms; }
