@@ -1,24 +1,17 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState, useCallback } from 'react'
 
 export function HeroBanner() {
   const [loaded, setLoaded] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const video = videoRef.current
+  const videoRef = useCallback((video: HTMLVideoElement | null) => {
     if (!video) return
-
-    const handleData = () => setLoaded(true)
 
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
       setLoaded(true)
-    } else {
-      video.addEventListener('loadeddata', handleData)
     }
-
-    return () => video.removeEventListener('loadeddata', handleData)
+    const handleData = () => setLoaded(true)
+    video.addEventListener('loadeddata', handleData)
   }, [])
 
   return (
@@ -37,7 +30,7 @@ export function HeroBanner() {
         preload="metadata"
         aria-hidden
         poster="/assets/banner-poster.webp"
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute inset-0 object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       >
         <source src="/assets/banner.webm" type="video/webm" />
       </video>
