@@ -48,13 +48,13 @@ export function Nav() {
 
   return (
     <NavigationMenu className="w-full max-w-full flex justify-end" viewport={false}>
-      <NavigationMenuList className="flex-col items-start gap-1 w-full p-0 space-y-3">
+      <NavigationMenuList className="flex-col items-start gap-1 w-full p-0">
         <div className="mb-6">
           <SiteLogo />
         </div>
         {navLinks.map((link) => (
-          <NavigationMenuItem key={link.href} className="w-full">
-            <NavLink
+            <NavigationMenuItem key={link.href} className="w-full">
+              <NavLink
               href={link.href}
               label={link.label.toLocaleUpperCase()}
               icon={link.icon}
@@ -64,8 +64,8 @@ export function Nav() {
         ))}
         <Separator className="w-full my-2" />
         {externalLinks.map((link) => (
-          <NavigationMenuItem key={link.href} className="w-full">
-            <NavLink
+            <NavigationMenuItem key={link.href} className="w-full">
+              <NavLink
               href={link.href}
               label={link.label.toLocaleUpperCase()}
               icon={link.icon}
