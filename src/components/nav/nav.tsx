@@ -20,7 +20,7 @@ import LinkSymbolIcon from '../icons/Link'
 const navLinks = [
   { href: '/', label: 'Inicio', icon: BeerMugIcon },
   { href: '/codigo', label: 'Código', icon: CodeIcon },
-  { href: '/blog', label: 'Blog', icon: DogFaceIcon },
+  { href: '/posts', label: 'Blog', icon: DogFaceIcon },
 ] as const
 
 const externalLinks = [
