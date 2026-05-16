@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
 const items = [
   { href: '/', icon: BeerMugIcon, label: 'Inicio' },
   { href: '/codigo', icon: CodeIcon, label: 'Código' },
-  { href: '/blog', icon: DogFaceIcon, label: 'Blog' },
+  { href: '/posts', icon: DogFaceIcon, label: 'Blog' },
   { href: 'https://linkedin.com/fakeuser', icon: GithubIcon, label: 'LinkedIn', external: true },
   { href: 'https://github.com/fakeuser', icon: LinkSymbolIcon, label: 'GitHub', external: true },
 ]
@@ -36,7 +36,9 @@ export function MobileNav() {
             {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             className={cn(
               'flex items-center justify-center size-10 rounded-lg transition-colors',
-              isActive(item.href) ? 'text-foreground' : 'text-muted-foreground hover:text-foreground/80'
+              isActive(item.href)
+                ? 'text-foreground'
+                : 'text-muted-foreground hover:text-foreground/80'
             )}
           >
             <item.icon size={22} />
