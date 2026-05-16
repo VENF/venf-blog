@@ -1,7 +1,6 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import * as React from 'react'
 
@@ -19,7 +18,7 @@ export function SwitchTheme() {
 
   if (!mounted) {
     return (
-      <Button variant="outline" size="icon" disabled>
+      <Button variant="outline" className="border-none bg-transparent" size="icon" disabled>
         <BlackSunWithRaysIcon size={20} />
         <span className="sr-only">Toggle theme</span>
       </Button>
@@ -33,7 +32,7 @@ export function SwitchTheme() {
       variant="outline"
       size="icon"
       onClick={() => setTheme(isLight ? 'dark' : 'light')}
-      className="cursor-pointer"
+      className="cursor-pointer border-none !bg-transparent"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
@@ -43,7 +42,7 @@ export function SwitchTheme() {
           exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
         >
-          {isLight ? <BlackSunWithRaysIcon size={20}/> : <CrescentMoonIcon size={20}/>}
+          {isLight ? <BlackSunWithRaysIcon size={20} /> : <CrescentMoonIcon size={20} />}
         </motion.div>
       </AnimatePresence>
       <span className="sr-only">Toggle theme</span>

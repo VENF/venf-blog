@@ -29,10 +29,10 @@ export function HeroBanner() {
         playsInline
         preload="metadata"
         aria-hidden
-        poster="/assets/banner-poster.webp"
-        className={`absolute inset-0 object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        poster="/assets/poster.webp"
+        className={`absolute inset-0 object-cover w-full h-full transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
       >
-        <source src="/assets/banner.webm" type="video/webm" />
+        <source src="/assets/main.webm" type="video/webm" />
       </video>
     </div>
   )
