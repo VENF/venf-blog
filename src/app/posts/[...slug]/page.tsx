@@ -8,7 +8,6 @@ import { PostBody } from '@/app/_components/post-body'
 import { PostHeader } from '@/app/_components/post-header'
 import { ScrollProgress } from '@/app/_components/scroll-progress'
 import { ImageZoom } from '@/app/_components/image-zoom'
-import { BlogCodeBlocks } from '@/app/_components/blog-code-blocks'
 
 type Props = {
   params: Promise<{ slug: string[] }>
@@ -21,7 +20,7 @@ export default async function Post(props: Props) {
 
   if (!post) return notFound()
 
-  const content = await markdownToHtml(post.content || '')
+  const segments = await markdownToHtml(post.content || '')
 
   return (
     <>
@@ -46,9 +45,8 @@ export default async function Post(props: Props) {
           <article>
             <hr className="border-t mb-[48px]" />
             <div className="relative">
-              <PostBody content={content} />
+              <PostBody segments={segments} />
               <ImageZoom />
-              <BlogCodeBlocks />
             </div>
           </article>
         </div>
