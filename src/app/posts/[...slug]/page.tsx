@@ -7,7 +7,6 @@ import markdownToHtml from '@/lib/markdownToHtml'
 import { PostBody } from '@/app/_components/post-body'
 import { PostHeader } from '@/app/_components/post-header'
 import { ScrollProgress } from '@/app/_components/scroll-progress'
-import { ImageZoom } from '@/app/_components/image-zoom'
 
 type Props = {
   params: Promise<{ slug: string[] }>
@@ -28,7 +27,7 @@ export default async function Post(props: Props) {
       <div className="min-h-dvh p-3 sm:p-5">
         <div className="mx-auto max-w-4xl">
           <Link
-            href="/"
+            href="/blog"
             className="mt-[48px] flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="size-4" />
@@ -46,7 +45,6 @@ export default async function Post(props: Props) {
             <hr className="border-t mb-[48px]" />
             <div className="relative">
               <PostBody segments={segments} />
-              <ImageZoom />
             </div>
           </article>
         </div>

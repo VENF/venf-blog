@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Navigation flow', () => {
-  test('Home → Blog → Article → Codigo', async ({ page }) => {
+  test('Home → Blog → Article → Code', async ({ page }) => {
     await page.goto('/')
 
     await expect(page.locator('h1')).toBeVisible()
@@ -16,9 +16,9 @@ test.describe('Navigation flow', () => {
     await expect(page).toHaveURL(/\/posts\//)
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 
-    const codigoLink = page.getByRole('link', { name: /código|codigo/i })
-    await codigoLink.click()
-    await expect(page).toHaveURL(/\/codigo/)
-    await expect(page.getByRole('heading', { name: /código|codigo/i })).toBeVisible()
+    const codeLink = page.getByRole('link', { name: /código|code/i })
+    await codeLink.click()
+    await expect(page).toHaveURL(/\/code/)
+    await expect(page.getByRole('heading', { name: /código|code/i })).toBeVisible()
   })
 })

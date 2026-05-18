@@ -1,28 +1,36 @@
 import { Metadata } from 'next'
 import { getAllProjects } from '@/lib/projects'
-import { ProjectCard } from '@/app/_components-code/project-card'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Código | venf',
 }
 
-export default function CodigoPage() {
+export default function CodePage() {
   const projects = getAllProjects()
 
   return (
     <div className="min-h-dvh p-3 sm:p-5">
-      <div className="mx-auto max-w-4xl">
-        <h1 className="mb-2 text-3xl font-bold tracking-tighter">Código</h1>
-        <p className="mb-8 text-muted-foreground">Interactive demos and experiments.</p>
-        {projects.length > 0 ? (
-          <div className="grid gap-5 sm:grid-cols-2">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
-          </div>
-        ) : (
-          <p className="py-12 text-center text-muted-foreground">No projects yet.</p>
-        )}
+      <div className="mx-auto max-w-6xl">
+        <Link
+          href="/"
+          className="mt-[48px] flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="size-4" />
+          Volver
+        </Link>
+      </div>
+      <div className="mx-auto max-w-6xl flex flex-col mt-10">
+        {projects.map((project) => (
+          <Link
+            key={project.slug}
+            href={`/code/${project.slug}`}
+            className="my-2 inline-block hover:text-muted-foreground"
+          >
+            {project.slug}
+          </Link>
+        ))}
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { getProjectBySlug } from '@/lib/projects'
 import markdownToHtml from '@/lib/markdownToHtml'
 import { Badge } from '@/components/ui/badge'
+import { PostBody } from '@/app/_components/post-body'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -16,7 +17,7 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) return notFound()
 
-  const readmeHtml = project.readme ? await markdownToHtml(project.readme) : ''
+  const segments = project.readme ? await markdownToHtml(project.readme) : []
 
   return (
     <div className="min-h-dvh p-3 sm:p-5">
@@ -51,11 +52,10 @@ export default async function ProjectPage({ params }: Props) {
             </Link>
           )}
 
-          {readmeHtml && (
-            <div
-              className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-20 mt-8"
-              dangerouslySetInnerHTML={{ __html: readmeHtml }}
-            />
+          {segments.length > 0 && (
+            <div className="mt-8">
+              <PostBody segments={segments} />
+            </div>
           )}
         </article>
       </div>
