@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 interface NavLinkProps {
   href: string
   label: string
-  icon: any
+  icon: React.ElementType
   isActive: boolean
   isExternal?: boolean
 }

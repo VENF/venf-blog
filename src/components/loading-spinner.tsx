@@ -1,12 +1,6 @@
-import "../app/spinner.css";
+import '../app/spinner.css'
 
-export function LoadingSpinner({
-  width = 30,
-  height = 30,
-}: {
-  width?: number;
-  height?: number;
-}) {
+export function LoadingSpinner({ width = 30, height = 30 }: { width?: number; height?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -64,5 +58,5 @@ export function LoadingSpinner({
       <use className="l d43" href="#l" x="39" y="50" />
       <use className="l d44" href="#l" x="50" y="50" />
     </svg>
-  );
+  )
 }

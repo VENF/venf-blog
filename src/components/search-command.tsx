@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { SearchIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -20,8 +19,13 @@ export function SearchCommand() {
 
   return (
     <>
-      <Button className='cursor-pointer' onClick={() => setOpen(true)} variant="outline" size="icon">
-        <RightMagnifyingGlassIcon size={15}/>
+      <Button
+        className="cursor-pointer"
+        onClick={() => setOpen(true)}
+        variant="outline"
+        size="icon"
+      >
+        <RightMagnifyingGlassIcon size={15} />
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <Command>

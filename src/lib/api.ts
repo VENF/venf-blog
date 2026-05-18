@@ -37,7 +37,8 @@ export function getPostBySlug(slug: string) {
   const directPath = join(postsDirectory, `${realSlug}.md`)
   if (fs.existsSync(directPath)) {
     const fileContents = fs.readFileSync(directPath, 'utf8')
-    const { data, content } = matter(fileContents)
+    // @ts-expect-error — gray-matter types don't include `date` but it works at runtime
+    const { data, content } = matter(fileContents, { date: false })
     return { ...data, slug: realSlug, content } as Post
   }
 
@@ -57,6 +58,42 @@ export type TreeNode = {
   title: string
   href: string | null
   items?: TreeNode[]
+}
+
+export function getAllTags(posts: Post[]): string[] {
+  const tagSet = new Set<string>()
+  for (const post of posts) {
+    if (post.tags) {
+      for (const tag of post.tags) {
+        tagSet.add(tag)
+      }
+    }
+  }
+  return [...tagSet].sort()
+}
+
+export type TocEntry = {
+  id: string
+  text: string
+  level: number
+}
+
+export function extractToc(markdown: string): TocEntry[] {
+  const headingRegex = /^(#{2,3})\s+(.+)$/gm
+  const entries: TocEntry[] = []
+  let match: RegExpExecArray | null
+
+  while ((match = headingRegex.exec(markdown)) !== null) {
+    const level = match[1].length as 2 | 3
+    const text = match[2].trim()
+    const id = text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+    entries.push({ id, text, level })
+  }
+
+  return entries
 }
 
 export function buildTree(posts: Post[]): TreeNode[] {

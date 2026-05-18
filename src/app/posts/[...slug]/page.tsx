@@ -1,16 +1,14 @@
-import 'highlight.js/styles/github-dark.css'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { buildTree, getAllPosts, getPostBySlug } from '@/lib/api'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
+import { getAllPosts, getPostBySlug } from '@/lib/api'
 import markdownToHtml from '@/lib/markdownToHtml'
-import Container from '@/app/_components/container'
 import { PostBody } from '@/app/_components/post-body'
 import { PostHeader } from '@/app/_components/post-header'
-import { PostSidebar } from '@/app/_components/post-sidebar'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import Link from 'next/link'
-import { ArrowLeft, Menu } from 'lucide-react'
+import { ScrollProgress } from '@/app/_components/scroll-progress'
+import { ImageZoom } from '@/app/_components/image-zoom'
+import { BlogCodeBlocks } from '@/app/_components/blog-code-blocks'
 
 type Props = {
   params: Promise<{ slug: string[] }>
@@ -24,57 +22,38 @@ export default async function Post(props: Props) {
   if (!post) return notFound()
 
   const content = await markdownToHtml(post.content || '')
-  const allPosts = getAllPosts()
-  const tree = buildTree(allPosts)
 
   return (
-    <div className="min-h-dvh p-3 sm:p-5">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="fixed top-4 left-4 z-40 lg:hidden">
-            <Menu className="size-5" />
-            <span className="sr-only">Open menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-72 p-4">
+    <>
+      <ScrollProgress />
+      <div className="min-h-dvh p-3 sm:p-5">
+        <div className="mx-auto max-w-4xl">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4"
+            className="mt-[48px] flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="size-4" />
-            Back
+            Volver
           </Link>
-          <PostSidebar tree={tree} isSheet />
-        </SheetContent>
-      </Sheet>
-      <div className="grid grid-cols-1 lg:grid-cols-[.3fr_1fr] gap-10 p-3 sm:p-5">
-        <aside className="hidden lg:block">
-          <div className="sticky top-5 flex flex-col gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <ArrowLeft className="size-4" />
-              Back
-            </Link>
-            <PostSidebar tree={tree} />
-          </div>
-        </aside>
-        <main>
-          <Container>
-            <article className="mb-32">
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                excerpt={post.excerpt}
-              />
+          <PostHeader
+            title={post.title}
+            date={post.date}
+            excerpt={post.excerpt}
+            content={post.content || ''}
+          />
+        </div>
+        <div className="mx-auto max-w-2xl">
+          <article>
+            <hr className="border-t mb-[48px]" />
+            <div className="relative">
               <PostBody content={content} />
-            </article>
-          </Container>
-        </main>
+              <ImageZoom />
+              <BlogCodeBlocks />
+            </div>
+          </article>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

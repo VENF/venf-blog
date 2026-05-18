@@ -1,27 +1,25 @@
-import CoverImage from './cover-image'
+import { ReadingTime } from './reading-time'
 import DateFormatter from './date-formatter'
 
 type Props = {
   title: string
-  coverImage: string
   date: string
   excerpt: string
+  content: string
 }
 
-export function PostHeader({ title, coverImage, date, excerpt }: Props) {
+export function PostHeader({ title, date, excerpt, content }: Props) {
   return (
-    <>
-      <div className="mb-2 text-sm text-muted-foreground">
+    <div className="space-y-8 py-[48px]">
+      <div className="flex items-center justify-center gap-3 text-sm">
         <DateFormatter dateString={date} />
+        <span aria-hidden="true">·</span>
+        <ReadingTime content={content} />
       </div>
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight md:leading-none mb-8">
+      <h1 className="text-center text-3xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight md:leading-none">
         {title}
       </h1>
-      <div className="mb-8 sm:mx-0">
-        <CoverImage title={title} src={coverImage} />
-      </div>
-      <p className="text-lg text-muted-foreground mb-6">{excerpt}</p>
-      <hr className="border-t mb-8" />
-    </>
+      <p className="text-lg text-center">{excerpt}</p>
+    </div>
   )
 }

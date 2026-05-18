@@ -1,13 +1,12 @@
 ---
-title: 'Construyendo cimientos robustos (SOLID) 🎒'
+title: 'Construyendo cimientos robustos: SOLID bajo un enfoque funcional'
 date: '2023-09-20'
 coverImage: 'https://ik.imagekit.io/02idw6idur/spy-x-family-cast_converted.webp'
-excerpt: 'SOLID bajo un enfoque funcional'
+excerpt: 'Adaptando los principios clásicos al desarrollo actual.'
+tags: [solid, principios, frontend]
 ogImage:
   url: 'https://ik.imagekit.io/02idw6idur/spy-x-family-cast_converted.webp'
 ---
-
-# Principios SOLID
 
 Luego de haber escrito un artículo sobre Arquitectura hexagonal, perdí de vista lo esencial
 a la hora de entender a profundidad un concepto. Recuerdo a un profesor en la universidad
@@ -22,7 +21,7 @@ que veremos SOLID bajo un enfoque funcional y por supuesto, siguiendo
 la filosofía de este blog, lo haremos lo más ameno posible, sin tanta palabrería.
 Sin nada más que agregar, vamos allá.
 
-![vamos!](https://media.giphy.com/media/Nii2FhtCqITxT6uHnE/giphy.gif)
+<!-- ![vamos!](https://media.giphy.com/media/Nii2FhtCqITxT6uHnE/giphy.gif)  -->
 
 ## ¿ Qué son los principios SOLID ?
 
@@ -52,7 +51,7 @@ prematura cuando desarrollemos abstracciones innecesarias que añaden complejida
 
 **SOLID**
 
-![WoW](https://media.giphy.com/media/7m2HklUvR2oFkeeiDg/giphy.gif)
+<!-- ![WoW](https://media.giphy.com/media/7m2HklUvR2oFkeeiDg/giphy.gif)  -->
 
 ## Principio de Responsabilidad Única (SRP)
 
@@ -123,7 +122,7 @@ Perfecto!, hemos dividido nuestras responsabilidades, conseguimos robustez y mod
 Ahora tenemos un código más reutilizable, lo que nos permite aplicar la composición de funciones,
 que veremos en el siguiente de los principios **SOLID**.
 
-![WoW](https://media.giphy.com/media/zZC2AqB84z7zFnlkbF/giphy.gif)
+<!-- ![WoW](https://media.giphy.com/media/zZC2AqB84z7zFnlkbF/giphy.gif)  -->
 
 **¿Y ahora cómo identificamos si nuestras funciones están violando el SRP?**
 
@@ -189,7 +188,7 @@ en nuestra base de código. Continuemos!
 Si **S** es un suptipo de **T**, instancias de **T** deberian poder
 sustituirse por instancias de **S** sin alterar las propiedades del programa.
 
-![no entiendo](https://media.giphy.com/media/8v6MRmBnqgjjejfbQv/giphy.gif)
+<!-- ![no entiendo](https://media.giphy.com/media/8v6MRmBnqgjjejfbQv/giphy.gif)  -->
 
 No nos asustemos, quédate conmigo, vamos a explicar esto paso a paso.
 
@@ -208,7 +207,7 @@ Las funciones derivadas deben comportarse de una manera que sea consistente con 
 
 **Preservación de propiedades:** Si la función base tiene ciertas propiedades que se deben mantener, las funciones derivadas deben garantizar que estas propiedades se conserven. No deben romper las reglas establecidas por la función base
 
-![bien](https://media.giphy.com/media/edGzBC6GDOhutW32ps/giphy.gif)
+<!-- ![bien](https://media.giphy.com/media/edGzBC6GDOhutW32ps/giphy.gif)  -->
 
 Vamos a entenderlo mejor con un ejemplo en código:
 
@@ -382,7 +381,7 @@ export const filterAnime = (): AnimeFilters => {
 Perfectooo!! Muchísimo mejor ahora, ya nuestros contextos no están acoplados a la misma interfaz, tenemos más modularidad entre contextos y ahora es mucho más entendible y fácil de extender nuestro código.
 Veamos a continuación el último de los principios
 
-![iluminado](https://media.giphy.com/media/tsJHwLo3kwOx3rRBP0/giphy.gif)
+<!-- ![iluminado](https://media.giphy.com/media/tsJHwLo3kwOx3rRBP0/giphy.gif) -->
 
 ## Principio de Inversión de Dependencias (DIP)
 
@@ -468,6 +467,6 @@ const getById = async (id: AnimeId): Promise<Anime> => {
 
 Perfecto, ahora, sin importar cómo obtengamos los datos, nuestro caso de uso seguirá comportándose de la misma forma, cumplimos con el **ISP**, conseguimos facilitar la modificación y sustitución de implementaciones además de que ahora es más fácil testear nuestros casos de uso.
 
-![](https://media.giphy.com/media/u2Hq7bqjWWL8oWFz1T/giphy.gif)
+<!-- ![](https://media.giphy.com/media/u2Hq7bqjWWL8oWFz1T/giphy.gif)  -->
 
 ¡Hemos llegado al final de este artículo, espero te sirva y puedas leerlo cuantas veces lo necesites, nos vemos en los siguientes artículos!

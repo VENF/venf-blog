@@ -12,8 +12,8 @@ import { cn } from '@/lib/utils'
 
 const items = [
   { href: '/', icon: BeerMugIcon, label: 'Inicio' },
-  { href: '/codigo', icon: CodeIcon, label: 'Código' },
-  { href: '/posts', icon: DogFaceIcon, label: 'Blog' },
+  { href: '/code', icon: CodeIcon, label: 'Código' },
+  { href: '/blog', icon: DogFaceIcon, label: 'Blog' },
   { href: 'https://linkedin.com/fakeuser', icon: GithubIcon, label: 'LinkedIn', external: true },
   { href: 'https://github.com/fakeuser', icon: LinkSymbolIcon, label: 'GitHub', external: true },
 ]

@@ -1,8 +1,9 @@
 ---
-title: 'Frontend-Arquitectura hexagonal 🍺'
+title: 'Arquitectura Hexagonal en el Frontend: El arte de destilar código limpio🍺'
 date: '2023-08-04'
 coverImage: 'https://ik.imagekit.io/02idw6idur/707447_converted.webp'
-excerpt: 'Un enfoque para estructurar aplicaciones modulares y escalables'
+excerpt: 'Desacoplando la interfaz de la lógica para crear aplicaciones maduras y escalables.'
+tags: [arquitectura, hexagonal, frontend]
 ogImage:
   url: 'https://ik.imagekit.io/02idw6idur/707447_converted.webp'
 ---
@@ -16,7 +17,7 @@ No abordaremos absolutamente todo en este artículo; sino que lo iremos desglosa
 
 Vamos a armarnos el chiringuito, pero antes ¿Qué tal un poco de teoría? ¡Vamos!
 
-![disiplinados](https://media.giphy.com/media/KdC9AZ2q4bgLKeHc3m/giphy.gif)
+<!-- ![disiplinados](https://media.giphy.com/media/KdC9AZ2q4bgLKeHc3m/giphy.gif) -->
 
 ## Que es la Arquitectura hexagonal (puertos y adaptadores)
 
@@ -28,7 +29,7 @@ Debemos tener en cuenta que, uno de los pilares en los que se basa la arquitectu
 
 **¿¿KHOMO??** ¿Qué son "dependencias concretas" y "cómo se clasifica el nivel de cada capa?" Calma, calma. Vamos a explorar un poco de qué va cada una de las capas en las que se divide la arquitectura hexagonal
 
-![wtf](https://media.giphy.com/media/9x5a37tKFOCoJxLLWJ/giphy.gif)
+<!-- ![wtf](https://media.giphy.com/media/9x5a37tKFOCoJxLLWJ/giphy.gif) -->
 
 ## Pilares principales
 
@@ -44,13 +45,13 @@ Todas estas capas se componen mediante una regla de dependencia, y estas depende
 
 Quizá ahora mismo no te quede claro, pero no te preocupes, vamos a escribir ejemplos en código para definir todo esto, por lo pronto, veamos cómo armar nuestro directorio.
 
-![no entiendo nada](https://media.giphy.com/media/6IhNSPu41qQkGdSrfu/giphy.gif)
+<!-- ![no entiendo nada](https://media.giphy.com/media/6IhNSPu41qQkGdSrfu/giphy.gif) -->
 
 ## clasificacion de nuestras capas
 
 Ahora, bien, vamos a aplicar una estructura usando solo el enfoque de la arquitectura hexagonal:
 
-```
+```txt
  ./src
 ├── 📁 application
 │  ├── 📄 GetAnimeById
@@ -63,7 +64,7 @@ Ahora, bien, vamos a aplicar una estructura usando solo el enfoque de la arquite
 
 **Perfectooooo** ahora si nos estamos entendiendo.
 
-![vamos bien](https://media.giphy.com/media/xT0GqD6hwjEAkPq3kY/giphy.gif)
+<!-- ![vamos bien](https://media.giphy.com/media/xT0GqD6hwjEAkPq3kY/giphy.gif) -->
 
 Ya tenemos una imagen mental sobre cómo se traduce todo esto en una estructura de carpetas, ¿vale? Bien hasta ahí, entendible señor, pero aún falta algo para comprender mejor. Vamos a escribir nuestro código en **TypeScript** siguiendo los archivos de la estructura anterior para ver cómo encajan las piezas.
 
@@ -146,7 +147,7 @@ La ventaja de abstraer la implementación concreta de nuestro repositorio en la 
 
 Antes de continuar dejaré una explicación más detallada de cada capa teniendo en cuenta que estamos trabajando en el frontend.
 
-![veo la luz](https://media.giphy.com/media/xT0GqEkbTfaE5meNNe/giphy.gif)
+<!-- ![veo la luz](https://media.giphy.com/media/xT0GqEkbTfaE5meNNe/giphy.gif) -->
 
 ## ¿Cuál es mi trabajo ?
 
@@ -170,11 +171,11 @@ En esta capa encontramos todo lo relacionado con la entrada y salida de datos, e
 
 ## ¿ Y ahora que sigue ?
 
-![aun hay mas](https://media.giphy.com/media/hkbdpWKrH891e/giphy.gif)
+ <!-- ![aun hay mas](https://media.giphy.com/media/hkbdpWKrH891e/giphy.gif) -->
 
 No sé si te habrás dado cuenta, ya que en este ejemplo no se aprecia mucho el problema. Para visualizarlo mejor imagina que nuestra aplicación es mucho, muchoo más grande
 
-```
+```txt
  ./src
 ├── 📁 application
 │  ├── 📄 GetAnimeById
@@ -210,7 +211,7 @@ No sé si te habrás dado cuenta, ya que en este ejemplo no se aprecia mucho el 
 
 ¿Ya vas viendo el problema no?
 
-![no funciona](https://media.giphy.com/media/g5SW7jjVccIMM/giphy.gif)
+<!-- ![no funciona](https://media.giphy.com/media/g5SW7jjVccIMM/giphy.gif) -->
 
 A medida que nuestra aplicación escala, se torna un poco difícil de manejar; sobre todo a la hora de buscar los ficheros en los que vamos a trabajar.Tenemos todos nuestros contextos mezclados en sus respectivas capas, así que vamos a introducir otro enfoque interesante, por ello entra en juego el **Vertical slicing**
 
@@ -218,7 +219,7 @@ A medida que nuestra aplicación escala, se torna un poco difícil de manejar; s
 
 Consiste en dividir el sistema en funcionalidades verticales completas, que atraviesan todas las capas de la arquitectura hexagonal. Cada vertical slice, es un conjunto de características que proporcionan un valor tangible al usuario y que se implementa de forma independiente y bla bla bla. Lo que vamos a hacer es ordenar nuestros contextos y cada uno tendrá sus propias capas independientes, por lo que el anterior ejemplo nos quedaría así:
 
-```
+```txt
 .
 ├── 📁 Anime
 │  ├── 📁 application
@@ -243,13 +244,13 @@ Consiste en dividir el sistema en funcionalidades verticales completas, que atra
 
 **¡Muchísimo mejor!**, ahora tenemos bien ordenados nuestros contextos; logramos conseguir mucha más cohesión, cada uno aislado del otro, y esto nos aportará, una ventaja tremenda, ya que podemos reemplazar, agregar o eliminar contextos y nuestro sistema seguiría funcionando con normalidad, por lo que nos da un 10 en robustez.
 
-![mejor](https://media.giphy.com/media/MARFSIQQNQVWw/giphy.gif)
+<!-- ![mejor](https://media.giphy.com/media/MARFSIQQNQVWw/giphy.gif) -->
 
 Ahora esto nos plantea un problema, ¿Qué sucede si tenemos que compartir alguna funcionalidad entre contexto? **Do not repeat yourself** si tienes alguna funcionalidad que se repite más de dos veces entre contextos, conviene crear un apartado **shared**! Pero cuidado! Todo poder conlleva una gran responsabilidad ¿no?
 
 Y como se que seguramente necesitas un ejemplo más tangible (como yo), aca te dejo un ejemplo en **Next** con lo que hemos visto antes:
 
-[hexagonal-architecture-template](https://github.com/VENF/hexagonal-architecture-template)
+<!-- [hexagonal-architecture-template](https://github.com/VENF/hexagonal-architecture-template) -->
 
 ## El camino que nos falta.
 
@@ -257,4 +258,4 @@ Hemos visto a grandes rasgos qué es la arquitectura hexagonal, que valor nos ap
 
 Ahora, nos despedimos. ¡Hasta el próximo artículo!
 
-![nos vemos](https://media.giphy.com/media/9oIOzcqxbrprPuItZb/giphy.gif)
+<!-- ![nos vemos](https://media.giphy.com/media/9oIOzcqxbrprPuItZb/giphy.gif) -->
