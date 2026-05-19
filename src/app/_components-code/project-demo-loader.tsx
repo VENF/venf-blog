@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 
 const demos: Record<string, React.ComponentType> = {
-  example: dynamic(() => import('@projects/example/page'), {
+  formstreamer: dynamic(() => import('@projects/form-streamer/page'), {
     loading: () => (
       <div className="flex items-center justify-center p-12 text-muted-foreground">
         Loading demo...
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export function ProjectDemoLoader({ slug }: Props) {
-  const DemoComponent = demos[slug]
+  const DemoComponent = demos[slug.replace('-', '')]
   if (!DemoComponent) {
     return (
       <div className="flex items-center justify-center p-12 text-muted-foreground">
