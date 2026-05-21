@@ -27,7 +27,7 @@ export function ProjectDemoLoader({ slug }: Props) {
   }
 
   return (
-    <div className="flex items-center justify-center p-8">
+    <div className="flex items-center justify-center">
       <DemoComponent />
     </div>
   )

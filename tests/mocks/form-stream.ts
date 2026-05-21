@@ -14,6 +14,6 @@ const MOCK_CHUNKS = [
 export async function* mockFormStream(): AsyncGenerator<string> {
   for (const chunk of MOCK_CHUNKS) {
     yield chunk
-    await sleep(50)
+    await sleep(2000)
   }
 }
