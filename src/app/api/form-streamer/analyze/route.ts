@@ -1,6 +1,5 @@
 import { NextRequest } from 'next/server'
-import { analyzePrompt } from '../agents/analyzer'
-import { generateFormStream } from '../agents/generator'
+import { createPipelineStream } from '../agents/pipeline'
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,13 +9,13 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: 'Prompt is required' }, { status: 400 })
     }
 
-    const analysis = await analyzePrompt(prompt)
+    const result = await createPipelineStream(prompt)
 
-    if (analysis.status !== 'clear') {
-      return Response.json(analysis)
+    if (result.type === 'ambiguous') {
+      return Response.json(result.output)
     }
 
-    return handleGeneratorStream(generateFormStream(analysis))
+    return handleGeneratorStream(result)
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Error processing request'
     return Response.json({ error: message }, { status: 500 })
