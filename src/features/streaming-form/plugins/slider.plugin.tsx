@@ -16,7 +16,7 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
 
   if (mode === 'range') {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <Label htmlFor={id} className="text-sm font-medium">
             {field.label}
@@ -46,7 +46,7 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
   const val = (value as number) ?? min
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <Label htmlFor={id} className="text-sm font-medium">
           {field.label}
@@ -70,7 +70,7 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
 
 function SliderSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-4 w-12" />

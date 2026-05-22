@@ -13,7 +13,7 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
     const max = field.maxLength ?? 500
     const current = ((value as string) ?? '').length
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
         <Textarea
           id={id}
@@ -22,6 +22,7 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
           placeholder={field.placeholder}
           aria-invalid={!!error}
           maxLength={max}
+          className="min-h-[120px]"
         />
         <div className="flex justify-between">
           {error && <p className="text-sm text-destructive">{error}</p>}
@@ -34,7 +35,7 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <Textarea
         id={id}
@@ -42,6 +43,7 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.placeholder}
         aria-invalid={variant === 'error' ? true : !!error}
+        className="min-h-[120px]"
       />
       {(variant === 'error' || error) && (
         <p className="text-sm text-destructive">{error ?? 'Invalid value'}</p>
@@ -52,9 +54,9 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
 
 function TextareaSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="min-h-16 w-full" />
+      <Skeleton className="min-h-[120px] w-full" />
     </div>
   )
 }

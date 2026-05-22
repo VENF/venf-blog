@@ -11,10 +11,17 @@ function getSystemPrompt(): string {
 
 function buildGeneratorPrompt(analysis: AnalyzerOutput): string {
   const fields = analysis.fields
-    .map(
-      (f) =>
-        `- ${f.name} (${f.type})${f.options ? ` options=[${f.options.join(', ')}]` : ''}${f.required ? ' required' : ''}${f.placeholder ? ` placeholder="${f.placeholder}"` : ''}`
-    )
+    .map((f) => {
+      const parts = [`- ${f.name} (${f.type})`]
+      if (f.options) parts.push(`options=[${f.options.join(', ')}]`)
+      if (f.required) parts.push('required')
+      if (f.placeholder) parts.push(`placeholder="${f.placeholder}"`)
+      if (f.minLength != null) parts.push(`minLength=${f.minLength}`)
+      if (f.maxLength != null) parts.push(`maxLength=${f.maxLength}`)
+      if (f.pattern) parts.push(`pattern="${f.pattern}"`)
+      if (f.colSpan != null) parts.push(`colSpan=${f.colSpan}`)
+      return parts.join(' ')
+    })
     .join('\n')
 
   return `Genera un formulario con los siguientes campos:\n\n${fields}\n\nTítulo: ${analysis.title}\nSubmit: ${analysis.submitLabel}`

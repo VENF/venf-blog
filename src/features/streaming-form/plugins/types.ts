@@ -12,6 +12,7 @@ export interface FieldDef {
   maxLength?: number
   pattern?: string
   metadata?: Record<string, unknown>
+  colSpan?: number
 }
 
 export interface FieldProps {

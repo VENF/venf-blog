@@ -3,11 +3,12 @@ import path from 'path'
 import { generateText, Output } from 'ai'
 import { z } from 'zod'
 import { google } from '../provider'
+import { FIELD_TYPES } from './types'
 import type { AnalyzerOutput } from './types'
 
 const FieldSpecSchema = z.object({
   name: z.string(),
-  type: z.enum(['text', 'email', 'textarea', 'select', 'checkbox']),
+  type: z.enum(FIELD_TYPES),
   label: z.string(),
   placeholder: z.string().optional(),
   required: z.boolean().optional(),
@@ -15,6 +16,7 @@ const FieldSpecSchema = z.object({
   minLength: z.number().optional(),
   maxLength: z.number().optional(),
   pattern: z.string().optional(),
+  colSpan: z.number().min(1).max(12).optional(),
 })
 
 const StatusEnum = z.enum(['clear', 'ambiguous'])

@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import { fieldRegistry } from '../plugins/registry'
 import { useFormStore } from '../stores/form-store'
 import { FieldSkeleton } from './field-skeleton'
@@ -21,17 +22,34 @@ export function DynamicField({ field }: DynamicFieldProps) {
     [field.name, setValue]
   )
 
-  if (!isComplete) {
-    return <FieldSkeleton type={field.type} />
-  }
-
-  const Component = plugin.component
   return (
-    <Component
-      field={field}
-      value={field.value ?? plugin.defaultValue}
-      onChange={handleChange}
-      error={field.error}
-    />
+    <AnimatePresence mode="wait">
+      {isComplete ? (
+        <motion.div
+          key="input"
+          initial={{ filter: 'blur(4px)', opacity: 0 }}
+          animate={{ filter: 'blur(0px)', opacity: 1 }}
+          exit={{ filter: 'blur(4px)', opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+        >
+          <plugin.component
+            field={field}
+            value={field.value ?? plugin.defaultValue}
+            onChange={handleChange}
+            error={field.error}
+          />
+        </motion.div>
+      ) : (
+        <motion.div
+          key="skeleton"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <FieldSkeleton type={field.type} />
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }

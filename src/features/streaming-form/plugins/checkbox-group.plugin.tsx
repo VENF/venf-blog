@@ -18,7 +18,7 @@ function CheckboxGroupInput({ field, value, onChange, error }: FieldProps) {
   )
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label id={id}>{field.label}</Label>
       <div role="group" aria-labelledby={id} className="flex flex-col gap-2">
         {(field.options ?? []).map((opt) => (
@@ -42,7 +42,7 @@ function CheckboxGroupInput({ field, value, onChange, error }: FieldProps) {
 
 function CheckboxGroupSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">

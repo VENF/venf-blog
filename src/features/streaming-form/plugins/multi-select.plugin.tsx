@@ -14,7 +14,7 @@ function MultiSelectInput({ field, value, onChange, error }: FieldProps) {
   const creatable = (field.metadata?.creatable as boolean) ?? false
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <MultipleSelector
         inputProps={{ id }}
@@ -35,9 +35,9 @@ function MultiSelectInput({ field, value, onChange, error }: FieldProps) {
 
 function MultiSelectSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="min-h-9.5 w-full rounded-md" />
+      <Skeleton className="min-h-10 w-full rounded-md" />
     </div>
   )
 }

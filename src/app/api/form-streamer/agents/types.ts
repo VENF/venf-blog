@@ -1,6 +1,27 @@
+export const FIELD_TYPES = [
+  'text',
+  'email',
+  'textarea',
+  'select',
+  'checkbox',
+  'password',
+  'otp',
+  'radio',
+  'checkbox-group',
+  'switch',
+  'slider',
+  'multi-select',
+  'phone',
+  'masked-time',
+  'number-stepper',
+  'card-details',
+] as const
+
+export type FieldType = (typeof FIELD_TYPES)[number]
+
 export interface FieldSpec {
   name: string
-  type: 'text' | 'email' | 'textarea' | 'select' | 'checkbox'
+  type: FieldType
   label: string
   placeholder?: string
   required?: boolean
@@ -8,6 +29,7 @@ export interface FieldSpec {
   minLength?: number
   maxLength?: number
   pattern?: string
+  colSpan?: number
 }
 
 export interface AnalyzerOutput {

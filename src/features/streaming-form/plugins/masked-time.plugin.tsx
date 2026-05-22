@@ -11,7 +11,7 @@ function MaskedTimeInput({ field, value, onChange, error }: FieldProps) {
   const inputRef = useMaskInput({ mask: '99:99:99' })
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <Input
         id={id}
@@ -21,6 +21,7 @@ function MaskedTimeInput({ field, value, onChange, error }: FieldProps) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.placeholder ?? 'HH:MM:ss'}
         aria-invalid={!!error}
+        className="h-10"
       />
       {error && <p className="text-sm text-destructive">{error}</p>}
     </div>
@@ -29,9 +30,9 @@ function MaskedTimeInput({ field, value, onChange, error }: FieldProps) {
 
 function MaskedTimeSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-8 w-full" />
+      <Skeleton className="h-10 w-full" />
     </div>
   )
 }

@@ -40,7 +40,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
 
   if (variant === 'error') {
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
         <Input
           id={id}
@@ -49,6 +49,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
           onChange={(e) => onChange(e.target.value)}
           placeholder={field.placeholder}
           aria-invalid={true}
+          className="h-10"
         />
         <p className="text-sm text-destructive">{error ?? 'Invalid value'}</p>
       </div>
@@ -59,9 +60,9 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const isStart = variant === 'icon-start'
     const icon = resolveIcon(field.metadata?.icon as string)
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
-        <InputGroup>
+        <InputGroup className="h-10!">
           {isStart && icon && <InputGroupAddon align="inline-start">{icon}</InputGroupAddon>}
           <InputGroupInput
             id={id}
@@ -70,6 +71,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder}
             aria-invalid={!!error}
+            className="!h-10"
           />
           {!isStart && icon && <InputGroupAddon align="inline-end">{icon}</InputGroupAddon>}
         </InputGroup>
@@ -84,9 +86,9 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const startButton = field.metadata?.startButton as string | undefined
     const endButton = field.metadata?.endButton as string | undefined
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
-        <InputGroup>
+        <InputGroup className="h-10!">
           {(startAddon || startButton) && (
             <InputGroupAddon align="inline-start">
               {startButton ? (
@@ -105,6 +107,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder}
             aria-invalid={!!error}
+            className="!h-10"
           />
           {(endAddon || endButton) && (
             <InputGroupAddon align="inline-end">
@@ -126,9 +129,9 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
   if (variant === 'button') {
     const buttonLabel = (field.metadata?.buttonLabel as string) ?? 'Submit'
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
-        <InputGroup>
+        <InputGroup className="h-10!">
           <InputGroupInput
             id={id}
             type="text"
@@ -136,6 +139,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
             onChange={(e) => onChange(e.target.value)}
             placeholder={field.placeholder}
             aria-invalid={!!error}
+            className="!h-10"
           />
           <InputGroupAddon align="inline-end">
             <InputGroupButton size="xs" variant="default">
@@ -152,7 +156,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const max = field.maxLength ?? 100
     const current = ((value as string) ?? '').length
     return (
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label htmlFor={id}>{field.label}</Label>
         <Input
           id={id}
@@ -162,6 +166,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
           placeholder={field.placeholder}
           aria-invalid={!!error}
           maxLength={max}
+          className="h-10"
         />
         <div className="flex justify-between">
           <ErrorBlock error={error} />
@@ -174,7 +179,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <Input
         id={id}
@@ -183,6 +188,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.placeholder}
         aria-invalid={!!error}
+        className="h-10"
       />
       <ErrorBlock error={error} />
     </div>
@@ -191,9 +197,9 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
 
 function TextSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-8 w-full" />
+      <Skeleton className="h-10 w-full" />
     </div>
   )
 }

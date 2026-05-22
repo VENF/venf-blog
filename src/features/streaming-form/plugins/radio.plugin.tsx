@@ -8,7 +8,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 function RadioInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <RadioGroup
         id={id}
@@ -32,7 +32,7 @@ function RadioInput({ field, value, onChange, error }: FieldProps) {
 
 function RadioSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">

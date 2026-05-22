@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
   try {
     if (mock) {
-      return handleGeneratorStream(mockGenerateFormStream('variants_demo'))
+      return handleGeneratorStream(mockGenerateFormStream('register'))
     }
 
     const body = await request.json()

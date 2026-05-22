@@ -32,7 +32,7 @@ function OtpInput({ field, value, onChange, error }: FieldProps) {
   const splitAt = slots === 6 ? 3 : slots === 4 ? 2 : 0
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <InputOTP
         id={id}
@@ -81,13 +81,13 @@ function OtpInput({ field, value, onChange, error }: FieldProps) {
 
 function OtpSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
       <div className="flex gap-2">
-        <Skeleton className="size-8" />
-        <Skeleton className="size-8" />
-        <Skeleton className="size-8" />
-        <Skeleton className="size-8" />
+        <Skeleton className="size-10" />
+        <Skeleton className="size-10" />
+        <Skeleton className="size-10" />
+        <Skeleton className="size-10" />
       </div>
     </div>
   )

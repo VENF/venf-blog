@@ -12,7 +12,7 @@ function NumberStepperInput({ field, value, onChange, error }: FieldProps) {
   const step = (field.metadata?.step as number) ?? 1
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <NumberField
         aria-label={field.label}
@@ -24,17 +24,17 @@ function NumberStepperInput({ field, value, onChange, error }: FieldProps) {
         isInvalid={!!error}
         className="flex flex-col gap-1"
       >
-        <Group className="border-input focus-within:border-ring focus-within:ring-ring/50 flex h-8 w-full items-center rounded-lg border transition-[color,box-shadow] focus-within:ring-[3px]">
+        <Group className="border-input focus-within:border-ring focus-within:ring-ring/50 flex h-10 w-full items-center rounded-lg border transition-[color,box-shadow] focus-within:ring-[3px]">
           <Button
             slot="decrement"
-            className="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-full items-center justify-center border-r px-2.5 text-sm outline-none focus-visible:ring-[3px]"
+            className="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-full items-center justify-center border-r px-3 text-sm outline-none focus-visible:ring-[3px]"
           >
             −
           </Button>
           <Input className="h-full flex-1 bg-transparent px-2.5 text-sm text-center outline-none" />
           <Button
             slot="increment"
-            className="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-full items-center justify-center border-l px-2.5 text-sm outline-none focus-visible:ring-[3px]"
+            className="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-full items-center justify-center border-l px-3 text-sm outline-none focus-visible:ring-[3px]"
           >
             +
           </Button>
@@ -47,9 +47,9 @@ function NumberStepperInput({ field, value, onChange, error }: FieldProps) {
 
 function NumberStepperSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-8 w-full" />
+      <Skeleton className="h-10 w-full" />
     </div>
   )
 }

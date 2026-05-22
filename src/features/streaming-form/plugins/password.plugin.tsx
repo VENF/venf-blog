@@ -4,7 +4,7 @@ import type { FieldPlugin, FieldProps } from './types'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Eye, EyeOff, Check, X } from 'lucide-react'
+import { Eye, EyeOff, Check, X, Lock } from 'lucide-react'
 
 function getStrength(value: string): number {
   let score = 0
@@ -39,9 +39,12 @@ function PasswordInput({ field, value, onChange, error }: FieldProps) {
   const strength = getStrength(val)
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label htmlFor={id}>{field.label}</Label>
       <div className="relative">
+        <span className="pointer-events-none absolute left-2.5 top-1/2 z-10 -translate-y-1/2">
+          <Lock className="size-4 text-muted-foreground" />
+        </span>
         <Input
           id={id}
           type={visible ? 'text' : 'password'}
@@ -49,7 +52,7 @@ function PasswordInput({ field, value, onChange, error }: FieldProps) {
           onChange={(e) => onChange(e.target.value)}
           placeholder={field.placeholder}
           aria-invalid={!!error}
-          className="pr-9"
+          className="pl-8 pr-9 h-10"
         />
         <button
           type="button"
@@ -92,9 +95,9 @@ function PasswordInput({ field, value, onChange, error }: FieldProps) {
 
 function PasswordSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-8 w-full" />
+      <Skeleton className="h-10 w-full" />
       <Skeleton className="h-1.5 w-full" />
       <div className="flex flex-col gap-1">
         <Skeleton className="h-3 w-40" />

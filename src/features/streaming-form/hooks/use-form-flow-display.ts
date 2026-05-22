@@ -111,6 +111,7 @@ const STATE_MESSAGES: Record<FlowStatus, string> = {
   complete: 'Formulario enviado con éxito.',
   error: 'Algo salió mal.',
 }
+
 export function useFormFlowDisplay(state: FlowStatus) {
   const badgeInfo = useMemo(
     () =>

@@ -14,7 +14,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
     usePaymentInputs()
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Label id={id}>{field.label}</Label>
       <div role="group" aria-labelledby={id} {...wrapperProps} className="flex flex-col gap-2">
         <div className="relative">
@@ -25,7 +25,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
               onChange({ ...val, cardNumber: e.target.value })
             }
             placeholder="Número de tarjeta"
-            className="pr-9"
+            className="pr-9 h-10"
           />
           <CreditCard className="pointer-events-none absolute right-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
         </div>
@@ -41,6 +41,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
                 onChange({ ...val, expiry: e.target.value })
               }
               placeholder="MM/YY"
+              className="h-10"
             />
             {meta.erroredInputs?.expiryDate && (
               <p className="text-sm text-destructive">{meta.erroredInputs.expiryDate}</p>
@@ -54,6 +55,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
                 onChange({ ...val, cvc: e.target.value })
               }
               placeholder="CVC"
+              className="h-10"
             />
             {meta.erroredInputs?.cvc && (
               <p className="text-sm text-destructive">{meta.erroredInputs.cvc}</p>
@@ -68,12 +70,12 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
 
 function CardDetailsSkeleton() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-8 w-full" />
+      <Skeleton className="h-10 w-full" />
       <div className="flex gap-2">
-        <Skeleton className="h-8 flex-1" />
-        <Skeleton className="h-8 flex-1" />
+        <Skeleton className="h-10 flex-1" />
+        <Skeleton className="h-10 flex-1" />
       </div>
     </div>
   )

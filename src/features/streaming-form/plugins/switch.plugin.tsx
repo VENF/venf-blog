@@ -6,7 +6,7 @@ import { Switch } from '@/components/ui/switch'
 
 function SwitchInput({ field, value, onChange, error }: FieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
         <Switch
           id={field.name}

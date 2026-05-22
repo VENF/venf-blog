@@ -187,10 +187,10 @@ export function useStreamingForm(options?: UseStreamingFormOptions) {
   const submit = useCallback(async () => {
     if (state !== 'interactive') return
     store.setSubmitting()
-    const values = form.getValues()
+    const values = Object.fromEntries(useFormStore.getState().fields.map((f) => [f.name, f.value]))
     console.log('Form submitted:', values)
     store.setSuccess()
-  }, [state, form, store])
+  }, [state, store])
 
   const answerFeedback = useCallback(
     async (feedback: string) => {
