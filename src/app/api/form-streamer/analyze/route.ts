@@ -1,39 +1,73 @@
-import { z } from 'zod'
 import { NextRequest } from 'next/server'
 import { analyzePrompt } from '../agents/analyzer'
-import { mockAnalyzePrompt } from '../agents/mock-analyzer'
-
-const RequestSchema = z.object({
-  prompt: z.string().min(1, 'Prompt is required'),
-  history: z.array(z.string()).optional(),
-})
+import { generateFormStream } from '../agents/generator'
 
 export async function POST(request: NextRequest) {
-  const mock = request.nextUrl.searchParams.get('mock') === 'true'
-
   try {
-    const body = await request.json()
-    const parsed = RequestSchema.safeParse(body)
+    const { prompt } = await request.json()
 
-    if (!parsed.success) {
-      return Response.json(
-        { error: 'Invalid request', details: parsed.error.issues },
-        { status: 400 }
-      )
+    if (!prompt || typeof prompt !== 'string') {
+      return Response.json({ error: 'Prompt is required' }, { status: 400 })
     }
 
-    const { prompt, history } = parsed.data
+    const analysis = await analyzePrompt(prompt)
 
-    if (mock) {
-      return Response.json(mockAnalyzePrompt(prompt))
+    if (analysis.status !== 'clear') {
+      return Response.json(analysis)
     }
 
-    // ajustar prompt
-    const analysis = await analyzePrompt(prompt, history)
-
-    return Response.json(analysis)
+    return handleGeneratorStream(generateFormStream(analysis))
   } catch (e) {
-    const message = e instanceof Error ? e.message : 'Error analyzing prompt'
+    const message = e instanceof Error ? e.message : 'Error processing request'
     return Response.json({ error: message }, { status: 500 })
   }
+}
+
+async function handleGeneratorStream(result: { textStream: AsyncIterable<string> }) {
+  const encoder = new TextEncoder()
+  const id = `chat-${Date.now()}`
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        for await (const chunk of result.textStream) {
+          const event = {
+            id,
+            object: 'chat.completion.chunk',
+            choices: [
+              {
+                index: 0,
+                delta: { content: chunk },
+                finish_reason: null as null | string,
+              },
+            ],
+          }
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`))
+        }
+
+        controller.enqueue(
+          encoder.encode(
+            `data: ${JSON.stringify({
+              id,
+              object: 'chat.completion.chunk',
+              choices: [{ index: 0, delta: {}, finish_reason: 'stop' }],
+            })}\n\n`
+          )
+        )
+        controller.enqueue(encoder.encode('data: [DONE]\n\n'))
+      } catch (e) {
+        const message = e instanceof Error ? e.message : 'Error generating form'
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error: message })}\n\n`))
+      }
+      controller.close()
+    },
+  })
+
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      Connection: 'keep-alive',
+    },
+  })
 }

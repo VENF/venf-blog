@@ -30,12 +30,57 @@ function buildGeneratorPrompt(analysis: AnalyzerOutput): string {
 export function generateFormStream(analysis: AnalyzerOutput) {
   const systemPrompt = getSystemPrompt()
   const userPrompt = buildGeneratorPrompt(analysis)
+  const startTime = performance.now()
 
-  return streamText({
+  const result = streamText({
     model: google('gemini-3-flash-preview'),
     system: systemPrompt,
     prompt: userPrompt,
     temperature: 0.5,
     maxRetries: 3,
   })
+
+  let fullOutput = ''
+
+  async function* wrappedStream() {
+    try {
+      for await (const chunk of result.textStream) {
+        fullOutput += chunk
+        yield chunk
+      }
+
+      const [totalUsage, finishReason, reasoningText] = await Promise.all([
+        result.totalUsage,
+        result.finishReason,
+        result.reasoningText,
+      ])
+      const latency = performance.now() - startTime
+
+      console.log(
+        JSON.stringify({
+          type: 'generator',
+          model: 'gemini-3-flash-preview',
+          finishReason,
+          reasoningText,
+          usage: totalUsage,
+          output: fullOutput,
+          latencyMs: Math.round(latency),
+        })
+      )
+    } catch (error) {
+      const latency = performance.now() - startTime
+      console.error(
+        JSON.stringify({
+          type: 'generator',
+          model: 'gemini-3-flash-preview',
+          error: error instanceof Error ? error.message : String(error),
+          latencyMs: Math.round(latency),
+          partialOutput: fullOutput,
+        })
+      )
+      throw error
+    }
+  }
+
+  return { textStream: wrappedStream() }
 }

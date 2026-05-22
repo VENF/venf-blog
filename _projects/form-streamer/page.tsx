@@ -5,7 +5,7 @@ import { StreamingFormShell } from '@/features/streaming-form/components/streami
 export default function FormStreamerDemo() {
   return (
     <div className="w-full h-full">
-      <StreamingFormShell mock />
+      <StreamingFormShell />
     </div>
   )
 }

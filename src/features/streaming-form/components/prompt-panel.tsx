@@ -18,19 +18,19 @@ const PROMPTS = [
     icon: IconFileSpark,
     text: 'Formulario de contacto',
     prompt:
-      'Genera un formulario de contacto con campos para nombre completo, correo electrónico, asunto y un mensaje de texto largo. Incluye validación de email y campos requeridos.',
-  },
-  {
-    icon: IconFileAnalytics,
-    text: 'Encuesta de satisfacción',
-    prompt:
-      'Crea una encuesta de satisfacción con campos para calificar del 1 al 5 el servicio, una selección de categoría (soporte, ventas, facturación), y un área de texto para comentarios adicionales.',
+      'Genera un formulario de contacto con nombre, correo electrónico y un mensaje de texto. Todos los campos requeridos con validación de email.',
   },
   {
     icon: IconFileCertificate,
     text: 'Registro de usuarios',
     prompt:
-      'Genera un formulario de registro con campos para nombre de usuario, correo, contraseña, confirmación de contraseña, y un selector de rol (admin, editor, usuario). Incluye validación de contraseña segura.',
+      'Crea un formulario de registro con nombre de usuario (mínimo 3 caracteres), correo electrónico, contraseña segura (mínimo 8 caracteres, mayúscula y número), selección de rol (usuario, editor, admin) y un switch para aceptar términos y condiciones.',
+  },
+  {
+    icon: IconFileAnalytics,
+    text: 'Configurador de producto',
+    prompt:
+      'Genera un formulario para configurar un producto con: nombre del producto (texto con icono), categoría (select: electrónicos, ropa, hogar), talla (radio: S, M, L, XL), cantidad (number stepper, min 1 max 10), garantía extendida (switch), etiquetas (multi-select: nuevo, oferta, popular), presupuesto máximo (slider 0-1000), comentarios (textarea con límite de 300 caracteres) y fecha de entrega (masked-time). Los selects y grupos deben ocupar 12 columnas.',
   },
 ]
 

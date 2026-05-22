@@ -6,12 +6,10 @@ import { useStreamingForm } from '../hooks/use-streaming-form'
 import { FormRenderer } from './form-renderer'
 import { PromptPanel } from './prompt-panel'
 import { StatusBar } from './status-bar'
-import { ErrorPanel } from './error-panel'
 import { FeedbackPanel } from './feedback-panel'
 
 interface StreamingFormShellProps {
   initialPrompt?: string
-  mock?: boolean
 }
 
 const blurTransition = {
@@ -21,19 +19,9 @@ const blurTransition = {
   transition: { duration: 0.4, ease: 'easeOut' as const },
 } as const
 
-export function StreamingFormShell({ initialPrompt, mock }: StreamingFormShellProps) {
-  const {
-    state,
-    error,
-    question,
-    formTitle,
-    formSubmitLabel,
-    submit,
-    start,
-    retry,
-    globalError,
-    answerFeedback,
-  } = useStreamingForm({ mock })
+export function StreamingFormShell({ initialPrompt }: StreamingFormShellProps) {
+  const { state, error, question, formTitle, formSubmitLabel, submit, start, answerFeedback } =
+    useStreamingForm()
   const [prompt, setPrompt] = useState(initialPrompt ?? '')
   const hasStarted = useRef(false)
 
@@ -71,12 +59,7 @@ export function StreamingFormShell({ initialPrompt, mock }: StreamingFormShellPr
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-3xl mx-auto p-2">
-      <StatusBar
-        state={state}
-        message={globalError && state !== 'error' ? globalError : undefined}
-      />
-
-      {globalError && state !== 'error' && <ErrorPanel error={globalError} onRetry={retry} />}
+      <StatusBar state={state} />
 
       <AnimatePresence mode="wait">
         {contentKey === 'form' && (

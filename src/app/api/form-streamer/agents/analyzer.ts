@@ -41,15 +41,11 @@ function getSystemPrompt(): string {
   return fs.readFileSync(path.join(promptsDir, 'system-analyzer.md'), 'utf-8')
 }
 
-export async function analyzePrompt(
-  userPrompt: string,
-  history?: string[]
-): Promise<AnalyzerOutput> {
+export async function analyzePrompt(userPrompt: string): Promise<AnalyzerOutput> {
   const systemPrompt = getSystemPrompt()
 
-  const messages = history ? history.map((msg) => ({ role: 'user' as const, content: msg })) : []
-
-  const { output } = await generateText({
+  const startTime = performance.now()
+  const result = await generateText({
     model: google('gemini-3-flash-preview'),
     system: systemPrompt,
     prompt: userPrompt,
@@ -57,8 +53,19 @@ export async function analyzePrompt(
     temperature: 0.3,
     maxRetries: 0,
   })
+  const latency = performance.now() - startTime
 
-  console.log('output', output)
+  console.log(
+    JSON.stringify({
+      type: 'analyzer',
+      model: 'gemini-3-flash-preview',
+      finishReason: result.finishReason,
+      reasoningText: result.reasoningText,
+      usage: result.totalUsage,
+      output: result.output,
+      latencyMs: Math.round(latency),
+    })
+  )
 
-  return output
+  return result.output
 }
