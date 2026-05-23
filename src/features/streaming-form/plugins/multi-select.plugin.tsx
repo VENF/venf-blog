@@ -1,9 +1,9 @@
 import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import MultipleSelector, { type Option } from '@/components/ui/multi-select'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function MultiSelectInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -14,8 +14,7 @@ function MultiSelectInput({ field, value, onChange, error }: FieldProps) {
   const creatable = (field.metadata?.creatable as boolean) ?? false
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <MultipleSelector
         inputProps={{ id }}
         value={selectedOptions}
@@ -28,8 +27,7 @@ function MultiSelectInput({ field, value, onChange, error }: FieldProps) {
         creatable={creatable}
         className="w-full"
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
@@ -37,7 +35,11 @@ function MultiSelectSkeleton() {
   return (
     <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="min-h-10 w-full rounded-md" />
+      <div className="flex min-h-10 w-full flex-wrap items-center gap-1.5 rounded-lg border border-muted bg-muted/20 px-3 py-2">
+        <Skeleton className="h-5 w-16 rounded-full" />
+        <Skeleton className="h-5 w-12 rounded-full" />
+        <Skeleton className="h-5 w-14 rounded-full" />
+      </div>
     </div>
   )
 }

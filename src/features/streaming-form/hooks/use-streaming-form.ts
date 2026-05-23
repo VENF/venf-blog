@@ -83,6 +83,15 @@ export function useStreamingForm() {
       : null
   }, [parsedValue])
 
+  const fieldCount = useMemo(() => {
+    if (parsedValue && typeof parsedValue.fieldCount === 'number') {
+      return parsedValue.fieldCount as number
+    }
+    return null
+  }, [parsedValue])
+
+  const fieldIndex = fields.length
+
   const runPipeline = useCallback(
     async (prompt: string) => {
       const res = await fetch('/api/form-streamer/analyze', {
@@ -172,6 +181,8 @@ export function useStreamingForm() {
     fields,
     formTitle,
     formSubmitLabel,
+    fieldCount,
+    fieldIndex,
     start,
     answerFeedback,
     submit,

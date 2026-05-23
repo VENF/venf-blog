@@ -20,8 +20,18 @@ const blurTransition = {
 } as const
 
 export function StreamingFormShell({ initialPrompt }: StreamingFormShellProps) {
-  const { state, error, question, formTitle, formSubmitLabel, submit, start, answerFeedback } =
-    useStreamingForm()
+  const {
+    state,
+    error,
+    question,
+    formTitle,
+    formSubmitLabel,
+    fieldCount,
+    fieldIndex,
+    submit,
+    start,
+    answerFeedback,
+  } = useStreamingForm()
   const [prompt, setPrompt] = useState(initialPrompt ?? '')
   const hasStarted = useRef(false)
 
@@ -59,7 +69,7 @@ export function StreamingFormShell({ initialPrompt }: StreamingFormShellProps) {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-3xl mx-auto p-2">
-      <StatusBar state={state} />
+      <StatusBar state={state} fieldIndex={fieldIndex} fieldCount={fieldCount} />
 
       <AnimatePresence mode="wait">
         {contentKey === 'form' && (
@@ -87,7 +97,7 @@ export function StreamingFormShell({ initialPrompt }: StreamingFormShellProps) {
               prompt={prompt}
               onPromptChange={setPrompt}
               onSubmit={handleStart}
-              disabled={!prompt.trim()}
+              //disabled={!prompt.trim() || state === 'connecting' || state === 'analyzing'}
               submitLabel={state === 'idle' ? 'Generate Form' : 'Try Again'}
               message={state === 'error' ? (error ?? 'An error occurred') : null}
               messageVariant={state === 'error' ? 'destructive' : undefined}

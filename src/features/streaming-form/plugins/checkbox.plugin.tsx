@@ -1,23 +1,19 @@
 import { z } from 'zod'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function CheckboxInput({ field, value, onChange, error }: FieldProps) {
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2">
-        <Checkbox
-          id={field.name}
-          checked={(value as boolean) ?? false}
-          onCheckedChange={(checked) => onChange(!!checked)}
-          aria-invalid={!!error}
-        />
-        <Label htmlFor={field.name}>{field.label}</Label>
-      </div>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    <FieldWrapper field={field} error={error} labelPosition="side">
+      <Checkbox
+        id={field.name}
+        checked={(value as boolean) ?? false}
+        onCheckedChange={(checked) => onChange(!!checked)}
+        aria-invalid={!!error}
+      />
+    </FieldWrapper>
   )
 }
 

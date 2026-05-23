@@ -2,17 +2,16 @@ import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useMaskInput } from 'use-mask-input'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function MaskedTimeInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   const inputRef = useMaskInput({ mask: '99:99:99' })
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <Input
         id={id}
         ref={inputRef}
@@ -23,8 +22,7 @@ function MaskedTimeInput({ field, value, onChange, error }: FieldProps) {
         aria-invalid={!!error}
         className="h-10"
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

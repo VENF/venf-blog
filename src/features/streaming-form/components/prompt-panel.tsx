@@ -80,7 +80,8 @@ export function PromptPanel({
             value={prompt}
             onChange={(e) => onPromptChange(e.target.value)}
             placeholder="Describe el formulario que quieres crear..."
-            className="w-full border-0 p-4 transition-[padding] duration-200 ease-in-out min-h-[48.4px] outline-none text-[16px] text-foreground resize-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent! whitespace-pre-wrap break-words"
+            disabled={disabled}
+            className="w-full border-0 p-4 transition-[padding] duration-200 ease-in-out min-h-[48.4px] outline-none text-[16px] text-foreground resize-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent! whitespace-pre-wrap break-words disabled:opacity-50"
           />
         </div>
 
@@ -131,7 +132,8 @@ export function PromptPanel({
           >
             <Button
               variant="ghost"
-              className="cursor-pointer group flex items-center gap-2 rounded-full px-3 py-2 text-sm text-foreground transition-colors duration-200 ease-out hover:bg-muted/30 h-auto bg-transparent dark:bg-[#1A1A1A] dark:shadow-lg dark:border-2 dark:border-[#0C0C0C]"
+              disabled={disabled}
+              className="cursor-pointer group flex items-center gap-2 rounded-full px-3 py-2 text-sm text-foreground transition-colors duration-200 ease-out hover:bg-muted/30 h-auto bg-transparent dark:bg-[#1A1A1A] dark:shadow-lg dark:border-2 dark:border-[#0C0C0C] disabled:opacity-50"
               onClick={() => handlePromptClick(promptText)}
             >
               <Icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />

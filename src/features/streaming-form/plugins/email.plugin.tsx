@@ -1,16 +1,15 @@
 import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Mail } from 'lucide-react'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function EmailInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <InputGroup className="h-10!">
         <InputGroupAddon align="inline-start">
           <Mail className="size-4" />
@@ -25,8 +24,7 @@ function EmailInput({ field, value, onChange, error }: FieldProps) {
           className="!h-10"
         />
       </InputGroup>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
@@ -34,7 +32,10 @@ function EmailSkeleton() {
   return (
     <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-10 w-full" />
+      <div className="flex h-10 w-full items-center gap-0 rounded-lg border border-muted bg-muted/20 px-3">
+        <Skeleton className="size-4 rounded-sm" />
+        <Skeleton className="ml-2 h-4 flex-1" />
+      </div>
     </div>
   )
 }

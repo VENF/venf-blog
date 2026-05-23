@@ -1,15 +1,14 @@
 import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PhoneInput } from '@/components/ui/phone-input'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function PhoneField({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <PhoneInput
         id={id}
         value={(value as string) ?? ''}
@@ -17,8 +16,7 @@ function PhoneField({ field, value, onChange, error }: FieldProps) {
         placeholder={field.placeholder}
         aria-invalid={!!error}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
@@ -26,7 +24,11 @@ function PhoneSkeleton() {
   return (
     <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-10 w-full" />
+      <div className="flex h-10 w-full items-center gap-2 rounded-lg border border-muted bg-muted/20 px-3">
+        <Skeleton className="h-5 w-8 rounded-sm" />
+        <Skeleton className="h-4 w-1 rounded-full" />
+        <Skeleton className="h-4 flex-1" />
+      </div>
     </div>
   )
 }

@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   InputGroup,
@@ -11,6 +10,7 @@ import {
   InputGroupInput,
 } from '@/components/ui/input-group'
 import { Search, Mail, User, Globe, Link, Calendar, Clock } from 'lucide-react'
+import { FieldWrapper } from '../components/field-wrapper'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   search: Search,
@@ -29,19 +29,13 @@ function resolveIcon(name: string | undefined) {
   return <Icon className="size-4" />
 }
 
-function ErrorBlock({ error }: { error?: string }) {
-  if (!error) return null
-  return <p className="text-sm text-destructive">{error}</p>
-}
-
 function TextInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   const variant = (field.metadata?.variant as string) ?? 'basic'
 
   if (variant === 'error') {
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error ?? 'Invalid value'}>
         <Input
           id={id}
           type="text"
@@ -51,8 +45,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
           aria-invalid={true}
           className="h-10"
         />
-        <p className="text-sm text-destructive">{error ?? 'Invalid value'}</p>
-      </div>
+      </FieldWrapper>
     )
   }
 
@@ -60,8 +53,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const isStart = variant === 'icon-start'
     const icon = resolveIcon(field.metadata?.icon as string)
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error}>
         <InputGroup className="h-10!">
           {isStart && icon && <InputGroupAddon align="inline-start">{icon}</InputGroupAddon>}
           <InputGroupInput
@@ -75,8 +67,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
           />
           {!isStart && icon && <InputGroupAddon align="inline-end">{icon}</InputGroupAddon>}
         </InputGroup>
-        <ErrorBlock error={error} />
-      </div>
+      </FieldWrapper>
     )
   }
 
@@ -86,8 +77,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const startButton = field.metadata?.startButton as string | undefined
     const endButton = field.metadata?.endButton as string | undefined
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error}>
         <InputGroup className="h-10!">
           {(startAddon || startButton) && (
             <InputGroupAddon align="inline-start">
@@ -121,16 +111,14 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
             </InputGroupAddon>
           )}
         </InputGroup>
-        <ErrorBlock error={error} />
-      </div>
+      </FieldWrapper>
     )
   }
 
   if (variant === 'button') {
     const buttonLabel = (field.metadata?.buttonLabel as string) ?? 'Submit'
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error}>
         <InputGroup className="h-10!">
           <InputGroupInput
             id={id}
@@ -147,8 +135,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
-        <ErrorBlock error={error} />
-      </div>
+      </FieldWrapper>
     )
   }
 
@@ -156,8 +143,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
     const max = field.maxLength ?? 100
     const current = ((value as string) ?? '').length
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error}>
         <Input
           id={id}
           type="text"
@@ -168,19 +154,17 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
           maxLength={max}
           className="h-10"
         />
-        <div className="flex justify-between">
-          <ErrorBlock error={error} />
-          <span className="ml-auto text-xs text-muted-foreground tabular-nums">
+        <div className="flex justify-end">
+          <span className="text-xs text-muted-foreground tabular-nums">
             {current} / {max}
           </span>
         </div>
-      </div>
+      </FieldWrapper>
     )
   }
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <Input
         id={id}
         type="text"
@@ -190,8 +174,7 @@ function TextInput({ field, value, onChange, error }: FieldProps) {
         aria-invalid={!!error}
         className="h-10"
       />
-      <ErrorBlock error={error} />
-    </div>
+    </FieldWrapper>
   )
 }
 

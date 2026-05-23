@@ -4,6 +4,7 @@ import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Slider } from '@/components/ui/slider'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function SliderInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -16,7 +17,7 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
 
   if (mode === 'range') {
     return (
-      <div className="flex flex-col gap-3">
+      <FieldWrapper field={field} error={error} hideLabel>
         <div className="flex items-center justify-between">
           <Label htmlFor={id} className="text-sm font-medium">
             {field.label}
@@ -38,15 +39,14 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
           step={step}
           aria-label={field.label}
         />
-        {error && <p className="text-sm text-destructive">{error}</p>}
-      </div>
+      </FieldWrapper>
     )
   }
 
   const val = (value as number) ?? min
 
   return (
-    <div className="flex flex-col gap-3">
+    <FieldWrapper field={field} error={error} hideLabel>
       <div className="flex items-center justify-between">
         <Label htmlFor={id} className="text-sm font-medium">
           {field.label}
@@ -63,8 +63,7 @@ function SliderInput({ field, value, onChange, error }: FieldProps) {
         step={step}
         aria-label={field.label}
       />
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

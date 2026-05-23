@@ -1,10 +1,10 @@
 import { z } from 'zod'
 import { useId, useState, useEffect, useCallback, useRef } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from '@/components/ui/input-otp'
 import { Button } from '@/components/ui/button'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function OtpInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -32,8 +32,7 @@ function OtpInput({ field, value, onChange, error }: FieldProps) {
   const splitAt = slots === 6 ? 3 : slots === 4 ? 2 : 0
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <InputOTP
         id={id}
         maxLength={slots}
@@ -74,8 +73,7 @@ function OtpInput({ field, value, onChange, error }: FieldProps) {
           )}
         </div>
       )}
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

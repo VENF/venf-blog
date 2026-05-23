@@ -8,9 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Search, Globe } from 'lucide-react'
+import { FieldWrapper } from '../components/field-wrapper'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   search: Search,
@@ -30,8 +30,7 @@ function SelectInput({ field, value, onChange, error }: FieldProps) {
   const icon = variant === 'icon' ? resolveIcon(field.metadata?.icon as string) : null
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <Select value={(value as string) ?? ''} onValueChange={(val) => onChange(val)}>
         <SelectTrigger id={id} className="w-full h-10" aria-invalid={!!error}>
           {icon && <span className="mr-1">{icon}</span>}
@@ -45,8 +44,7 @@ function SelectInput({ field, value, onChange, error }: FieldProps) {
           ))}
         </SelectContent>
       </Select>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
@@ -54,7 +52,10 @@ function SelectSkeleton() {
   return (
     <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-10 w-full" />
+      <div className="flex h-10 w-full items-center justify-between rounded-lg border border-muted bg-muted/20 px-3">
+        <Skeleton className="h-4 w-20" />
+        <Skeleton className="h-4 w-4" />
+      </div>
     </div>
   )
 }

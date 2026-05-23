@@ -1,15 +1,15 @@
 import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function RadioInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <RadioGroup
         id={id}
         value={(value as string) ?? ''}
@@ -25,8 +25,7 @@ function RadioInput({ field, value, onChange, error }: FieldProps) {
           </div>
         ))}
       </RadioGroup>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

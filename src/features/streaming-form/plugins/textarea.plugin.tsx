@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function TextareaInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -13,8 +13,7 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
     const max = field.maxLength ?? 500
     const current = ((value as string) ?? '').length
     return (
-      <div className="flex flex-col gap-3">
-        <Label htmlFor={id}>{field.label}</Label>
+      <FieldWrapper field={field} error={error}>
         <Textarea
           id={id}
           value={(value as string) ?? ''}
@@ -24,31 +23,26 @@ function TextareaInput({ field, value, onChange, error }: FieldProps) {
           maxLength={max}
           className="min-h-[120px]"
         />
-        <div className="flex justify-between">
-          {error && <p className="text-sm text-destructive">{error}</p>}
-          <span className="ml-auto text-xs text-muted-foreground tabular-nums">
+        <div className="flex justify-end">
+          <span className="text-xs text-muted-foreground tabular-nums">
             {current} / {max}
           </span>
         </div>
-      </div>
+      </FieldWrapper>
     )
   }
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <Textarea
         id={id}
         value={(value as string) ?? ''}
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.placeholder}
-        aria-invalid={variant === 'error' ? true : !!error}
+        aria-invalid={!!error}
         className="min-h-[120px]"
       />
-      {(variant === 'error' || error) && (
-        <p className="text-sm text-destructive">{error ?? 'Invalid value'}</p>
-      )}
-    </div>
+    </FieldWrapper>
   )
 }
 

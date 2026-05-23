@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import { useId } from 'react'
 import type { FieldPlugin, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Input } from '@/components/ui/input'
 import { usePaymentInputs } from 'react-payment-inputs'
 import { CreditCard } from 'lucide-react'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -14,8 +14,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
     usePaymentInputs()
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label id={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <div role="group" aria-labelledby={id} {...wrapperProps} className="flex flex-col gap-2">
         <div className="relative">
           <Input
@@ -63,8 +62,7 @@ function CardDetailsInput({ field, value, onChange, error }: FieldProps) {
           </div>
         </div>
       </div>
-      {!meta.erroredInputs && error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

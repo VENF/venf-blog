@@ -1,19 +1,16 @@
 import { z } from 'zod'
-import { useId } from 'react'
 import type { FieldPlugin, FieldDef, FieldProps } from './types'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { NumberField, Group, Input, Button } from 'react-aria-components'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function NumberStepperInput({ field, value, onChange, error }: FieldProps) {
-  const id = useId()
   const min = field.minLength ?? 0
   const max = field.maxLength ?? 100
   const step = (field.metadata?.step as number) ?? 1
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <NumberField
         aria-label={field.label}
         value={(value as number) ?? min}
@@ -40,8 +37,7 @@ function NumberStepperInput({ field, value, onChange, error }: FieldProps) {
           </Button>
         </Group>
       </NumberField>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
@@ -49,7 +45,17 @@ function NumberStepperSkeleton() {
   return (
     <div className="flex flex-col gap-3">
       <Skeleton className="h-4 w-24" />
-      <Skeleton className="h-10 w-full" />
+      <div className="flex h-10 w-full items-center rounded-lg border border-muted bg-muted/20">
+        <div className="flex h-full w-10 items-center justify-center border-r border-muted">
+          <Skeleton className="h-4 w-4" />
+        </div>
+        <div className="flex flex-1 items-center justify-center">
+          <Skeleton className="h-4 w-6" />
+        </div>
+        <div className="flex h-full w-10 items-center justify-center border-l border-muted">
+          <Skeleton className="h-4 w-4" />
+        </div>
+      </div>
     </div>
   )
 }

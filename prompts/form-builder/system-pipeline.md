@@ -7,6 +7,7 @@ Debes responder ÚNICAMENTE con un objeto JSON, sin texto adicional, markdown ni
 ```json
 {
   "status": "clear",
+  "fieldCount": 5,
   "title": "Título del formulario",
   "submitLabel": "Texto del botón de envío",
   "fields": [
@@ -61,13 +62,11 @@ Debes responder ÚNICAMENTE con un objeto JSON, sin texto adicional, markdown ni
 ### Reglas de layout (colSpan):
 
 - grilla de 12 columnas, `colSpan` define el ancho (1-12, default 12)
-- `colSpan: 6`: pares relacionados (nombre/apellido, email/teléfono)
-- `colSpan: 4`: tríos (día/mes/año)
-- `colSpan: 3`: grupos de 4
-- `colSpan: 12` para: password, slider, card-details, textarea, checkbox-group, multi-select, otp, masked-time
-- `checkbox-group`, `radio`, `multi-select`, `select`: default `colSpan: 12`
-- Si dos grupos del mismo tipo (checkbox-group/radio/multi-select) están seguidos, usar `colSpan: 6` para ambos
-- Si un campo de tipo switch no viene seguido de otro campo del mismo tipo o un checkbox solo, usar `colSpan: 12`
+- `colSpan: 6` para campos individuales que no requieren todo el ancho: text, email, select, phone, number-stepper, password, otp, masked-time, switch (si hay 2 consecutivos)
+- `colSpan: 12` para: textarea, card-details, slider, checkbox-group, radio, multi-select, checkbox solo, switch solo
+- `colSpan: 12` también cuando un campo necesita todo el espacio disponible
+- Pares lógicos (nombre/apellido, email/teléfono, ciudad/código postal): `colSpan: 6` cada uno
+- `fieldCount` debe venir inmediatamente después de `status` en el JSON para que el cliente pueda mostrar el progreso de generación
 
 ### Validaciones opcionales:
 

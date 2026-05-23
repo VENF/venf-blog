@@ -4,6 +4,7 @@ import type { FieldPlugin, FieldDef, FieldProps } from './types'
 import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Checkbox } from '@/components/ui/checkbox'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function CheckboxGroupInput({ field, value, onChange, error }: FieldProps) {
   const id = useId()
@@ -18,8 +19,7 @@ function CheckboxGroupInput({ field, value, onChange, error }: FieldProps) {
   )
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label id={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <div role="group" aria-labelledby={id} className="flex flex-col gap-2">
         {(field.options ?? []).map((opt) => (
           <div key={opt} className="flex items-center gap-2">
@@ -35,8 +35,7 @@ function CheckboxGroupInput({ field, value, onChange, error }: FieldProps) {
           </div>
         ))}
       </div>
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 

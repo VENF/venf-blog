@@ -2,9 +2,9 @@ import { z } from 'zod'
 import { useId, useState } from 'react'
 import type { FieldPlugin, FieldProps } from './types'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Eye, EyeOff, Check, X, Lock } from 'lucide-react'
+import { FieldWrapper } from '../components/field-wrapper'
 
 function getStrength(value: string): number {
   let score = 0
@@ -39,8 +39,7 @@ function PasswordInput({ field, value, onChange, error }: FieldProps) {
   const strength = getStrength(val)
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor={id}>{field.label}</Label>
+    <FieldWrapper field={field} error={error}>
       <div className="relative">
         <span className="pointer-events-none absolute left-2.5 top-1/2 z-10 -translate-y-1/2">
           <Lock className="size-4 text-muted-foreground" />
@@ -88,8 +87,7 @@ function PasswordInput({ field, value, onChange, error }: FieldProps) {
           })}
         </ul>
       )}
-      {error && <p className="text-sm text-destructive">{error}</p>}
-    </div>
+    </FieldWrapper>
   )
 }
 
