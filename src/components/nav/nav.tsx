@@ -25,12 +25,12 @@ const navLinks = [
 
 const externalLinks = [
   {
-    href: 'https://linkedin.com/fakeuser',
+    href: 'https://www.linkedin.com/in/venf',
     label: 'LinkedIn',
     icon: GithubIcon,
   },
   {
-    href: 'https://github.com/fakeuser',
+    href: 'https://github.com/VENF',
     label: 'GitHub',
     icon: LinkSymbolIcon,
   },
