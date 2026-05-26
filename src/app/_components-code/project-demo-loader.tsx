@@ -1,16 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const demos: Record<string, React.ComponentType> = {
-  formstreamer: dynamic(() => import('@projects/form-streamer/page'), {
-    loading: () => (
-      <div className="flex items-center justify-center p-12 text-muted-foreground">
-        Loading demo...
-      </div>
-    ),
-  }),
-}
+const demos: Record<string, React.ComponentType> = {}
 
 type Props = {
   slug: string

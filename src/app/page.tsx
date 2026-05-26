@@ -24,10 +24,10 @@ export default function Home() {
           <HeroBanner />
           <div className="grid grid-cols-2 gap-4 p-2">
             <div>
-              <p>s-1</p>
+              <p></p>
             </div>
             <div>
-              <p>s-1</p>
+              <p></p>
             </div>
           </div>
         </div>

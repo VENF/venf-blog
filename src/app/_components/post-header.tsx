@@ -16,10 +16,12 @@ export function PostHeader({ title, date, excerpt, content }: Props) {
         <span aria-hidden="true">·</span>
         <ReadingTime content={content} />
       </div>
-      <h1 className="text-center text-3xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight md:leading-none">
+      <h1 className="text-center text-3xl md:text-5xl lg:text-5xl font-bold tracking-tighter leading-tight">
         {title}
       </h1>
-      <p className="text-lg text-center">{excerpt}</p>
+      <div className="flex items-center justify-center">
+        <p className="text-lg text-center w-[70%] text-muted-foreground">{excerpt}</p>
+      </div>
     </div>
   )
 }
