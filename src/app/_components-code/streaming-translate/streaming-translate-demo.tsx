@@ -37,11 +37,6 @@ export function StreamingTranslateDemo() {
   const [hasStarted, setHasStarted] = useState(false)
 
   useEffect(() => {
-    if (capturerState === 'capturing') start()
-    else stop()
-  }, [capturerState, start, stop])
-
-  useEffect(() => {
     if (capturerState !== 'capturing') return
 
     const startTime = Date.now() - elapsedRef.current
@@ -56,13 +51,16 @@ export function StreamingTranslateDemo() {
     if (!isSupported) return
     setHasStarted(true)
     if (capturerState === 'capturing') {
+      stop()
       setCapturerState('paused')
     } else {
+      start()
       setCapturerState('capturing')
     }
   }
 
   const handleReset = () => {
+    stop()
     setHasStarted(false)
     setCapturerState('idle')
     setElapsed(0)
