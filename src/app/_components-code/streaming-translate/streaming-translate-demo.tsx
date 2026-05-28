@@ -134,8 +134,8 @@ export function StreamingTranslateDemo() {
             <div className="flex items-center justify-between">
               <LanguageGroup />
               <Tooltip>
-                <TooltipTrigger>
-                  <Button className="bg-transparent cursor-pointer" size="icon-lg">
+                <TooltipTrigger asChild>
+                  <Button className="bg-transparent cursor-pointer" size="icon">
                     <Download className="stroke-white" />
                   </Button>
                 </TooltipTrigger>
