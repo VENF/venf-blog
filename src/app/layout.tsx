@@ -1,24 +1,9 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Analytics } from '@vercel/analytics/next'
-
-const jetbrainsMono = localFont({
-  src: [
-    {
-      path: '../../public/fonts/variable/JetBrainsMono[wght].ttf',
-      weight: '100 900',
-      style: 'normal',
-    },
-    {
-      path: '../../public/fonts/variable/JetBrainsMono-Italic[wght].ttf',
-      weight: '100 900',
-      style: 'italic',
-    },
-  ],
-  variable: '--font-sans',
-})
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
 
 export const metadata: Metadata = {
   title: 'venf',
@@ -34,7 +19,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${jetbrainsMono.variable} h-full antialiased`}
+      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

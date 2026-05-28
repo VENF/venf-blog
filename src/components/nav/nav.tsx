@@ -11,28 +11,24 @@ import { SiteLogo } from '@/components/site-logo'
 import { SwitchTheme } from '@/components/switch-theme'
 
 import { NavLink } from './nav-link'
-import { BeerMugIcon } from '../icons/Beer'
-import { CodeIcon } from '../icons/Code'
-import { DogFaceIcon } from '../icons/Dog'
-import { GithubIcon } from '../icons/Github'
-import LinkSymbolIcon from '../icons/Link'
+import { Blocks, Bookmark, Code2, GitBranchIcon, LinkIcon } from 'lucide-react'
 
 const navLinks = [
-  { href: '/', label: 'Inicio', icon: BeerMugIcon },
-  { href: '/code', label: 'Código', icon: CodeIcon },
-  { href: '/blog', label: 'Blog', icon: DogFaceIcon },
+  { href: '/', label: 'Inicio', icon: Blocks },
+  { href: '/code', label: 'Código', icon: Code2 },
+  { href: '/blog', label: 'Blog', icon: Bookmark },
 ] as const
 
 const externalLinks = [
   {
     href: 'https://www.linkedin.com/in/venf',
     label: 'LinkedIn',
-    icon: GithubIcon,
+    icon: LinkIcon,
   },
   {
     href: 'https://github.com/VENF',
     label: 'GitHub',
-    icon: LinkSymbolIcon,
+    icon: GitBranchIcon,
   },
 ] as const
 
@@ -54,7 +50,7 @@ export function Nav() {
           <NavigationMenuItem key={link.href} className="w-full">
             <NavLink
               href={link.href}
-              label={link.label.toLocaleUpperCase()}
+              label={link.label}
               icon={link.icon}
               isActive={isActive(link.href)}
             />
@@ -62,10 +58,10 @@ export function Nav() {
         ))}
         <Separator className="w-full my-2" />
         {externalLinks.map((link) => (
-          <NavigationMenuItem key={link.href} className="w-full">
+          <NavigationMenuItem key={link.href} className="w-full font-normal">
             <NavLink
               href={link.href}
-              label={link.label.toLocaleUpperCase()}
+              label={link.label}
               icon={link.icon}
               isActive={false}
               isExternal

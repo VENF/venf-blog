@@ -14,8 +14,13 @@ const items = [
   { href: '/', icon: BeerMugIcon, label: 'Inicio' },
   { href: '/code', icon: CodeIcon, label: 'Código' },
   { href: '/blog', icon: DogFaceIcon, label: 'Blog' },
-  { href: 'https://linkedin.com/fakeuser', icon: GithubIcon, label: 'LinkedIn', external: true },
-  { href: 'https://github.com/fakeuser', icon: LinkSymbolIcon, label: 'GitHub', external: true },
+  {
+    href: 'https://www.linkedin.com/in/venf',
+    icon: LinkSymbolIcon,
+    label: 'LinkedIn',
+    external: true,
+  },
+  { href: 'https://github.com/VENF', icon: GithubIcon, label: 'GitHub', external: true },
 ]
 
 export function MobileNav() {

@@ -6,7 +6,7 @@ import * as React from 'react'
 
 import { Button } from '@/components/ui/button'
 import { BlackSunWithRaysIcon } from './icons/Sun'
-import { CrescentMoonIcon } from './icons/Moon'
+import { Moon, Sun } from 'lucide-react'
 
 export function SwitchTheme() {
   const { theme, setTheme } = useTheme()
@@ -42,7 +42,7 @@ export function SwitchTheme() {
           exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
           transition={{ duration: 0.2, ease: 'easeInOut' }}
         >
-          {isLight ? <BlackSunWithRaysIcon size={20} /> : <CrescentMoonIcon size={20} />}
+          {isLight ? <Sun size={20} /> : <Moon size={20} />}
         </motion.div>
       </AnimatePresence>
       <span className="sr-only">Toggle theme</span>
