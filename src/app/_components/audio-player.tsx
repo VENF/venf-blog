@@ -4,8 +4,9 @@ import { useCallback, useState } from 'react'
 import { Play, Pause, Loader2, ChevronUp, ChevronDown } from 'lucide-react'
 import { useTTS } from '@/lib/use-tts'
 import { cn } from '@/lib/utils'
-import type { TTSSegment } from '@/lib/tts'
+
 import { Button } from '@/components/ui/button'
+import { TTSSegment } from '@/lib/ tts'
 
 type Props = {
   segments: TTSSegment[]
