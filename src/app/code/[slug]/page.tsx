@@ -42,7 +42,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
 
         <article>
-          <h1 className="text-3xl font-bold tracking-tighter mb-3">{project.title}</h1>
+          <h1 className="text-5xl font-bold tracking-tighter mb-3">{project.title}</h1>
           <p className="text-muted-foreground mb-4">{project.description}</p>
           <div className="border-b"></div>
           {segments.length > 0 && (
