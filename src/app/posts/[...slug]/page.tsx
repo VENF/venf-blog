@@ -4,11 +4,9 @@ import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { getAllPosts, getPostBySlug } from '@/lib/api'
 import markdownToHtml from '@/lib/markdownToHtml'
-import { extractTTSSegments } from '@/lib/tts'
 import { PostBody } from '@/app/_components/post-body'
 import { PostHeader } from '@/app/_components/post-header'
 import { ScrollProgress } from '@/app/_components/scroll-progress'
-import { AudioPlayer } from '@/app/_components/audio-player'
 
 type Props = {
   params: Promise<{ slug: string[] }>
@@ -22,7 +20,6 @@ export default async function Post(props: Props) {
   if (!post) return notFound()
 
   const segments = await markdownToHtml(post.content || '')
-  const ttsSegments = extractTTSSegments(post.content || '')
 
   return (
     <>
@@ -46,7 +43,6 @@ export default async function Post(props: Props) {
         <div className="mx-auto max-w-4xl">
           <article>
             <hr className="border-t" />
-            <AudioPlayer segments={ttsSegments} title={post.title} />
             <div className="relative mt-[40px]">
               <PostBody segments={segments} />
             </div>
