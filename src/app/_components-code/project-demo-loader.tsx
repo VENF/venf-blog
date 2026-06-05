@@ -11,11 +11,8 @@ function Loading() {
 }
 
 const demos: Record<string, React.ComponentType> = {
-  'streaming-translate': dynamic(
-    () =>
-      import('./streaming-translate/streaming-translate-demo').then(
-        (m) => m.StreamingTranslateDemo
-      ),
+  'policy-quote-tool': dynamic(
+    () => import('../../features/policy-quote-tool/view/quoter-view').then((m) => m.QuoterPage),
     { loading: Loading }
   ),
 }

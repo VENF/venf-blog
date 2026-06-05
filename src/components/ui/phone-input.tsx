@@ -155,7 +155,7 @@ const CountrySelect = ({
             variant="outline"
             size={variant}
             className={cn(
-              'flex gap-1 rounded-r-none border-e-0 px-2.5 py-0 leading-none hover:bg-transparent focus:z-10 data-pressed:bg-transparent',
+              'flex gap-1 h-[40px] rounded-r-none border-e-0 px-2.5 py-0 leading-none hover:bg-transparent focus:z-10 data-pressed:bg-transparent',
               disabled && 'dark:disabled:bg-input/80',
               triggerClassName
             )}
